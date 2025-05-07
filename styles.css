@@ -1,0 +1,810 @@
+/* =======================================================
+   GLOBAL VARIABLES - COLOR PALETTE
+======================================================= */
+:root {
+    --primary-color: #4B2E83;     /* Deep purple for headers/nav */
+    --accent-color: #FFB400;      /* Bright yellow for highlights/buttons */
+    --background-color: #FFFFFF;  /* Main page background */
+    --light-gray: #F5F5F5;        /* Light gray for cards/sections */
+    --text-color: #333333;        /* Primary text color */
+    --dark-primary: #00274d;      /* Darker primary color for headings */
+    --darker-accent: #005f8d;     /* Darker shade of accent color */
+}
+
+/* =======================================================
+   BASE BODY STYLE
+======================================================= */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--background-color); /* Set background color */
+    color: var(--text-color); /* Set primary text color */
+}
+
+/* Utility Class to Hide Elements */
+.hidden {
+    display: none; /* Hides an element */
+}
+
+/* =======================================================
+   LOADING SCREEN STYLES
+======================================================= */
+#loadingScreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color); /* Background color of the loading screen */
+    color: white; /* White text for contrast */
+    height: 100vh; /* Full screen height */
+    font-size: 2em;
+    font-weight: bold;
+}
+
+/* =======================================================
+   LOGIN / SIGNUP AUTHENTICATION PAGE
+======================================================= */
+.auth-page {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 20px;
+    background-color: var(--light-gray); /* Background of the form */
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow around form */
+    text-align: center;
+}
+
+.auth-page input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 8px; /* Rounded corners for inputs */
+}
+
+.auth-page button {
+    background-color: var(--accent-color); /* Accent color for buttons */
+    color: #fff; /* White text */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* =======================================================
+   HEADER AND NAVIGATION BAR
+======================================================= */
+header {
+    background-color: var(--primary-color); /* Navigation header background */
+    color: white; /* White text */
+    display: flex;   
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+nav {
+    background-color: var(--primary-color); /* Navigation background */
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+}
+
+nav li a {
+    color: white; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    padding: 12px 18px;
+    transition: all 0.3s ease;
+    display: inline-block;
+    border-radius: 6px;
+}
+
+/* Hover and Click Effects for Navigation */
+nav li a:hover {
+    background-color: rgba(255, 180, 0, 0.2);
+    transform: scale(1.05); /* Scale effect on hover */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Box shadow on hover */
+}
+
+nav li a:active {
+    animation: buttonClick 0.2s ease-out; /* Button click animation */
+}
+
+@keyframes buttonClick {
+    0% { transform: scale(1); }
+    50% { transform: scale(0.98); }
+    100% { transform: scale(1); }
+}
+
+nav li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color); /* Accent color underline */
+    transition: width 0.3s ease;
+}
+
+nav li a:hover::after {
+    width: 100%; /* Expand underline on hover */
+}
+
+nav li a:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 4px;
+    box-shadow: 0 0 6px var(--accent-color);
+}
+
+/* =======================================================
+   PAGE CONTAINER
+======================================================= */
+.page {
+    padding: 20px;
+}
+
+/* =======================================================
+   EVENT SECTION AND EVENT CARDS
+======================================================= */
+.event-card {
+    background-color: var(--light-gray);
+    padding: 10px;
+    margin: 10px 0;
+    border-left: 5px solid var(--accent-color);
+    border-radius: 8px;
+}
+
+/* Button inside Event Cards */
+.event-card button {
+    margin-top: 10px;
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.event-card button:hover {
+    background-color: #e6a600; /* Darken the button on hover */
+}
+
+/* =======================================================
+   REGISTER BUTTONS
+======================================================= */
+.register-btn {
+    background-color: var(--accent-color);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.register-btn:hover {
+    background-color: #e6a600; /* Darken button on hover */
+    transform: scale(1.03); /* Scale effect on hover */
+}
+
+.register-btn:active {
+    transform: scale(0.98); /* Button scale on click */
+}
+
+/* Disabled Register Button */
+.register-btn.registered {
+    background-color: #999999;
+    color: white;
+    cursor: not-allowed;
+    pointer-events: none; /* Disable interaction */
+}
+
+/* =======================================================
+   REGISTERED EVENTS LIST
+======================================================= */
+.registered-events {
+    background-color: var(--light-gray);
+    padding: 20px;
+    margin-top: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.registered-events h3 {
+    margin: 0 0 15px;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+#registered-events-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#registered-events-list li {
+    background-color: white;
+    color: var(--text-color);
+    padding: 12px 16px;
+    margin-bottom: 10px;
+    border-left: 5px solid var(--accent-color);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+#registered-events-list li:hover {
+    transform: scale(1.02); /* Hover effect to scale event item */
+}
+
+.unregister-btn {
+    float: right;
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 1.2rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.unregister-btn:hover {
+    color: #cc0000; /* Darker color on hover */
+}
+
+/* =======================================================
+   MAP SECTION
+======================================================= */
+.map-container iframe {
+    width: 100%;
+    height: 500px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================================================
+   NOTIFICATION PANEL – Enhanced GOAT UI
+======================================================= */
+
+/* Panel Container */
+.notification-panel {
+    position: fixed;
+    top: 10%;
+    right: 5%;
+    width: 350px;
+    max-height: 500px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    padding: 20px;
+    display: none;
+    z-index: 1000;
+    overflow-y: auto;
+    animation: slideIn 0.4s ease-out;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    border: 1px solid #e0e0e0;
+    backdrop-filter: blur(10px); /* subtle glass effect */
+}
+
+/* Slide In Animation */
+@keyframes slideIn {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Notification Card */
+.notification {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+    border-radius: 16px;
+    background-color: #fdfdfd;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    font-size: 15px;
+    color: #2c2c2c;
+    gap: 12px;
+    position: relative;
+}
+
+.notification:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-4px);
+    cursor: pointer;
+}
+
+/* Icon */
+.notification-icon {
+    font-size: 1.8em;
+    color: var(--primary-color);
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+/* Message and Time */
+.notification-message {
+    flex: 1;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.notification-time {
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 5px;
+    display: block;
+}
+
+/* Close Button */
+.close-notification {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: #bbb;
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-notification:hover {
+    color: #f44336;
+}
+
+/* Notification Types */
+.notification-info {
+    background: linear-gradient(135deg, #e1f5fe, #b3e5fc);
+    border-left: 5px solid #2196F3;
+}
+
+.notification-warning {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+    border-left: 5px solid #FF9800;
+}
+
+.notification-success {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+    border-left: 5px solid #4CAF50;
+}
+
+.notification-error {
+    background: linear-gradient(135deg, #ffebee, #ffcdd2);
+    border-left: 5px solid #F44336;
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 500px) {
+    .notification-panel {
+        width: 90%;
+        right: 5%;
+        top: 8%;
+        max-height: 90vh;
+        padding: 15px;
+    }
+
+    .notification {
+        padding: 14px 16px;
+    }
+}
+
+/* =======================================================
+   HOME PAGE STYLES
+======================================================= */
+#home {
+    background-color: #f9f9f9;
+    padding: 50px 0;
+    text-align: center;
+    color: #333;
+}
+
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.home-title {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: var(--dark-primary); /* Using primary color */
+}
+
+.home-description {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #555;
+}
+
+/* =======================================================
+   CONTACT US SECTION STYLES - Enhanced Version
+======================================================= */
+
+/* Universal box-sizing for layout consistency */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+.contact-us {
+    background-color: #f4f4f4;
+    padding: 40px 20px;
+    border-radius: 8px;
+    margin-top: 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.contact-us h3 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #003366; /* Darker shade of the primary color */
+    text-align: center;
+}
+
+.contact-us .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-us input,
+.contact-us textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-us input:focus,
+.contact-us textarea:focus {
+    border-color: var(--accent-color); /* Accent color */
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 102, 204, 0.3);
+}
+
+.cta-button {
+    background-color: var(--accent-color); /* Accent color */
+    color: white;
+    padding: 12px 25px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 20px auto 0;
+}
+
+.cta-button:hover {
+    background-color: var(--darker-accent); /* Darker shade on hover */
+}
+
+.cta-button:focus {
+    outline: 2px dashed #003366;
+    outline-offset: 4px;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 600px) {
+    .contact-us {
+        padding: 30px 15px;
+    }
+
+    .contact-us h3 {
+        font-size: 24px;
+    }
+
+    .cta-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+/* =======================================================
+   LINKS SECTION STYLES
+======================================================= */
+.links {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.links .link-item, .links .icon-link {
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 18px;
+    color: #003366; /* Using primary color */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.links .link-item:hover, .links .icon-link:hover {
+    color: var(--accent-color); /* Accent color on hover */
+}
+
+.links .icon-link i {
+    margin-right: 8px;
+}
+
+/* =======================================================
+   RESPONSIVE DESIGN FOR SMALLER SCREENS
+======================================================= */
+@media screen and (max-width: 768px) {
+    .home-title {
+        font-size: 28px;
+    }
+
+    .home-description {
+        font-size: 16px;
+    }
+
+    .contact-us {
+        padding: 30px 20px;
+    }
+
+    .cta-button {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+}
+
+
+/* =======================================================
+   12. FOOTER STYLES
+   Styles for the footer section of the website.
+======================================================= */
+footer {
+    background-color: var(--primary-color); /* Dark background for the footer */
+    color: white; /* White text */
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 16px;
+    margin-top: 50px; /* Space above the footer */
+}
+
+footer .footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+footer .footer-left,
+footer .footer-right {
+    flex: 1;
+    margin: 10px;
+}
+
+footer .footer-left {
+    font-size: 1.2rem;
+    color: #fff; /* White color for text */
+}
+
+footer .footer-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+footer .footer-right .social-icons a {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+footer .footer-right .social-icons a:hover {
+    color: var(--accent-color); /* Accent color for social icons on hover */
+}
+
+footer .footer-bottom {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #d1d1d1; /* Lighter text color for bottom section */
+}
+
+footer .footer-bottom a {
+    color: #d1d1d1;
+    text-decoration: none;
+}
+
+footer .footer-bottom a:hover {
+    color: white; /* Change to white on hover */
+}
+
+/* =======================================================
+   13. RESPONSIVE FOOTER DESIGN
+   Adjust footer layout for smaller screens.
+======================================================= */
+@media screen and (max-width: 768px) {
+    footer .footer-container {
+        flex-direction: column;
+        text-align: center; /* Center text on mobile */
+    }
+
+    footer .footer-left {
+        margin-bottom: 20px;
+        font-size: 1rem; /* Adjust font size for mobile */
+    }
+
+    footer .footer-right {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    footer .footer-right .social-icons a {
+        font-size: 1.2rem; /* Adjust icon size for mobile */
+    }
+
+    footer .footer-bottom {
+        font-size: 12px;
+    }
+}
+
+/* =======================================================
+   FACULTY SECTION STYLES
+======================================================= */
+/* Improved Faculty Table */
+#faculty table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#faculty th, #faculty td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+#faculty th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#faculty td {
+    background-color: var(--light-gray);
+}
+
+#faculty button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#faculty button:hover {
+    background-color: #e6a600;
+}
+
+/* DOCUMENT BUTTON */
+.document-btn {
+    background-color: #FFB400;
+    color: #333333;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.document-btn:hover {
+    background-color: #e6a600;
+}
+
+/* =======================================================
+   SIGN OUT BUTTON – GOAT UI WITH NEXT-LEVEL ANIMATIONS
+======================================================= */
+
+.signout-btn,
+.signout-button {
+    background: linear-gradient(135deg, #e53935, #d32f2f);
+    color: #fff;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(229, 57, 53, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+
+/* Glowing Ring Effect on Hover */
+.signout-btn::before,
+.signout-button::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 70%);
+    animation: rotateGlow 3s linear infinite;
+    z-index: 0;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+@keyframes rotateGlow {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Icon Style */
+.signout-btn svg,
+.signout-button svg {
+    width: 20px;
+    height: 20px;
+    fill: white;
+    z-index: 1;
+}
+
+/* Text layering fix */
+.signout-btn span,
+.signout-button span {
+    z-index: 1;
+}
+
+/* Hover Animation */
+.signout-btn:hover,
+.signout-button:hover {
+    transform: scale(1.06);
+    box-shadow: 0 10px 28px rgba(198, 40, 40, 0.4);
+}
+
+.signout-btn:hover::before,
+.signout-button:hover::before {
+    opacity: 1;
+}
+
+/* Active / Tap Effect */
+.signout-btn:active,
+.signout-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 12px rgba(198, 40, 40, 0.3);
+}
+
+.signout-btn {
+    margin-top: 30px; /* Add spacing under the button */
+}
+
