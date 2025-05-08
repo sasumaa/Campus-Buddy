@@ -101,22 +101,58 @@
         <p class="home-description">Explore events, navigate campus, and manage documents easily. Stay connected and organized!</p>
 
         <!-- ===== CONTACT US ===== -->
-        <div class="contact-us">
-            <h3>Contact Us</h3>
-            <form id="contactForm">
-                <div class="form-group">
-                    <input type="text" id="contactName" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="contactEmail" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea id="contactMessage" placeholder="Your Message" rows="4" required></textarea>
-                </div>
-                <button type="submit" class="cta-button">Send Message</button>
-            </form>
+<div class="contact-us">
+    <h3>Contact Us</h3>
+    <form id="contactForm">
+        <div class="form-group">
+            <input type="text" id="contactName" placeholder="Your Name" required>
         </div>
+        <div class="form-group">
+            <input type="email" id="contactEmail" placeholder="Your Email" required>
+        </div>
+        <div class="form-group">
+            <textarea id="contactMessage" placeholder="Your Message" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="cta-button">Send Message</button>
+    </form>
+</div>
 
+<script>
+  // Get the contact form and define the submit event
+  const form = document.getElementById("contactForm");
+  
+  form.addEventListener("submit", function(e) {
+      e.preventDefault();  // Prevent the form from refreshing the page upon submission
+
+      // Get form data
+      const name = document.getElementById("contactName").value;
+      const email = document.getElementById("contactEmail").value;
+      const message = document.getElementById("contactMessage").value;
+
+      // Create the payload that will be sent to the Google Apps Script
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("message", message);
+
+      // Replace YOUR_WEB_APP_URL with your actual Google Apps Script Web App URL
+      const scriptURL = "https://script.google.com/macros/s/AKfycbz_l7lfb5nqsMGLbqZDPz_k2S2iPZ21ycybGQ3S6Mrb-HGAB93WD1XqyaP3Y4WXLsPseQ/exec";
+
+      // Send the form data to the Google Apps Script web app using fetch()
+      fetch(scriptURL, {
+          method: "POST",
+          body: formData
+      })
+      .then(response => response.text())
+      .then(result => {
+          alert("Message sent successfully!");
+          form.reset();  // Clear the form after submission
+      })
+      .catch(error => {
+          alert("Error sending message.");
+      });
+  });
+</script>
         <!-- ===== LINKS SECTION ===== -->
         <div class="links">
             <a href="privacy.html" target="_blank" class="link-item">Privacy Policy</a>
