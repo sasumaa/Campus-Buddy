@@ -100,59 +100,20 @@
         <h2 class="home-title">Welcome to Campus Buddy</h2>
         <p class="home-description">Explore events, navigate campus, and manage documents easily. Stay connected and organized!</p>
 
-        <!-- ===== CONTACT US ===== -->
+     <!-- ===== CONTACT US ===== -->
 <div class="contact-us">
     <h3>Contact Us</h3>
     <form id="contactForm">
-        <div class="form-group">
-            <input type="text" id="contactName" placeholder="Your Name" required>
-        </div>
-        <div class="form-group">
-            <input type="email" id="contactEmail" placeholder="Your Email" required>
-        </div>
-        <div class="form-group">
-            <textarea id="contactMessage" placeholder="Your Message" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="cta-button">Send Message</button>
+       <input type="text" id="userName" placeholder="Your Name" required><br>
+        <input type="email" id="userEmail" placeholder="Your Email" required><br>
+        <textarea id="userMessage" placeholder="Your Message" rows="4" required></textarea><br>
+        <button id="sendMessageButton" type="submit">Send Message</button>
+
     </form>
 </div>
 
-<script>
-  // Get the contact form and define the submit event
-  const form = document.getElementById("contactForm");
-  
-  form.addEventListener("submit", function(e) {
-      e.preventDefault();  // Prevent the form from refreshing the page upon submission
 
-      // Get form data
-      const name = document.getElementById("contactName").value;
-      const email = document.getElementById("contactEmail").value;
-      const message = document.getElementById("contactMessage").value;
 
-      // Create the payload that will be sent to the Google Apps Script
-      const formData = new FormData();
-      formData.append("name", name);
-      formData.append("email", email);
-      formData.append("message", message);
-
-      // Replace YOUR_WEB_APP_URL with your actual Google Apps Script Web App URL
-      const scriptURL = "https://script.google.com/macros/s/AKfycbz_l7lfb5nqsMGLbqZDPz_k2S2iPZ21ycybGQ3S6Mrb-HGAB93WD1XqyaP3Y4WXLsPseQ/exec";
-
-      // Send the form data to the Google Apps Script web app using fetch()
-      fetch(scriptURL, {
-          method: "POST",
-          body: formData
-      })
-      .then(response => response.text())
-      .then(result => {
-          alert("Message sent successfully!");
-          form.reset();  // Clear the form after submission
-      })
-      .catch(error => {
-          alert("Error sending message.");
-      });
-  });
-</script>
         <!-- ===== LINKS SECTION ===== -->
         <div class="links">
             <a href="privacy.html" target="_blank" class="link-item">Privacy Policy</a>
@@ -191,25 +152,39 @@
                     </thead>
                     <tbody>
                         <tr>
+                            <td>Dr. Shalini Garg</td>
+                            <td>Head of Department , SOC</td>
+                            <td>N-003</td>
+                            <td><a href="mailto:shalini.garg@mituniversity.edu">shalini.garg@mituniversity.edu</a></td>
+                            <td><button onclick="composeEmail('shalini.garg@mituniversity.edu')">Email</button></td>
+                        </tr>
+                        <tr>
                             <td>Prof. Akash Alagankar</td>
                             <td>Design Thinking</td>
-                            <td>A-305</td>
-                            <td><a href="mailto:akash.alagankar@mitadt.edu">akash.alagankar@mitadt.edu</a></td>
-                            <td><button onclick="composeEmail('akash.alagankar@mitadt.edu')">Email</button></td>
+                            <td>S-116</td>
+                            <td><a href="mailto:akash.alagankar@mituniversity.edu">akash.alagankar@mituniversity.edu</a></td>
+                            <td><button onclick="composeEmail('akash.alagankar@mituniversity.edu')">Email</button></td>
                         </tr>
                         <tr>
-                            <td>Dr. John Doe</td>
-                            <td>Computer Science</td>
-                            <td>A-102</td>
-                            <td><a href="mailto:john.doe@mitadt.edu">john.doe@mitadt.edu</a></td>
-                            <td><button onclick="composeEmail('john.doe@mitadt.edu')">Email</button></td>
-                        </tr>
-                        <tr>
-                            <td>Prof. Jane Smith</td>
+                            <td>Dr. Anand Shukla</td>
                             <td>Mathematics</td>
-                            <td>B-204</td>
-                            <td><a href="mailto:jane.smith@mitadt.edu">jane.smith@mitadt.edu</a></td>
-                            <td><button onclick="composeEmail('jane.smith@mitadt.edu')">Email</button></td>
+                            <td>S-002</td>
+                            <td><a href="mailto:anand.shukla@mituniversity.edu">anand.shukla@mituniversity.edu</a></td>
+                            <td><button onclick="composeEmail('anand.shukla@mituniversity.edu')">Email</button></td>
+                        </tr>
+                        <tr>
+                            <td>Dr. Vaishali Kamble</td>
+                            <td>Material of Computing Devices</td>
+                            <td>N-005</td>
+                            <td><a href="mailto:vaishali.kamble@mituniversity.edu">vaishali.kamble@mituniversity.edu</a></td>
+                            <td><button onclick="composeEmail('vaishali.kamble@mituniversity.edu')">Email</button></td>
+                        </tr>
+                         <tr>
+                            <td>Dr. Pratiksha Dhande</td>
+                            <td>Data Structure , Programing Langauge</td>
+                            <td>9th Floor</td>
+                            <td><a href="mailto:pratiksha.dhande@mituniversity.edu">pratiksha.dhande@mituniversity.edu</a></td>
+                            <td><button onclick="composeEmail('pratiksha.dhande@mituniversity.edu')">Email</button></td>
                         </tr>
                     </tbody>
                 </table>
