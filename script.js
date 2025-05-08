@@ -85,14 +85,28 @@ function showPage(pageId) {
 }
 
 // Toggle the visibility of the notification panel
+let notificationTimeout;
+
 function toggleNotifications() {
-    const panel = document.getElementById("notificationPanel");
-    panel.classList.toggle("active"); // Toggle the active class to show or hide the notifications
+    const panel = document.getElementById('notificationPanel');
+    if (panel.style.display === 'none' || panel.style.display === '') {
+        panel.style.display = 'block'; // Show panel
+        clearTimeout(notificationTimeout); // Reset timeout when panel is opened
+        notificationTimeout = setTimeout(closeNotifications, 10000); // Auto-close after 10 seconds
+    } else {
+        closeNotifications();
+    }
 }
 
 // Close the notification panel
 function closeNotifications() {
-    document.getElementById("notificationPanel").classList.remove("active"); // Remove the active class to hide the panel
+    const panel = document.getElementById('notificationPanel');
+    panel.style.display = 'none'; // Hide panel
+}
+
+function closeNotification(button) {
+    const notification = button.closest('.notification');
+    notification.style.display = 'none'; // Close individual notification
 }
 
 // Open the TCS iON portal in a new tab
@@ -146,26 +160,37 @@ function unregisterEvent(button) {
     li.remove(); // Remove the event from the list
 }
 
+document.getElementById('contactForm').addEventListener('submit', async function(event) {
+    event.preventDefault(); // Prevent the default form submission
 
-let notificationTimeout;
+    // Collect form data
+    const name = document.getElementById('userName').value.trim();
+    const email = document.getElementById('userEmail').value.trim();
+    const message = document.getElementById('userMessage').value.trim();
 
-function toggleNotifications() {
-    const panel = document.getElementById('notificationPanel');
-    if (panel.style.display === 'none' || panel.style.display === '') {
-        panel.style.display = 'block'; // Show panel
-        clearTimeout(notificationTimeout); // Reset timeout when panel is opened
-        notificationTimeout = setTimeout(closeNotifications, 10000); // Auto-close after 10 seconds
-    } else {
-        closeNotifications();
+    if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
     }
-}
 
-function closeNotifications() {
-    const panel = document.getElementById('notificationPanel');
-    panel.style.display = 'none'; // Hide panel
-}
+    try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbzsGUzu0KHaZOzZy5tLEBpc7hExXGZ3Mg8_QeB-hqmik8EnHqubsm7OuV104d1-cxH3/exec', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+                name: name,
+                email: email,
+                message: message
+            })
+        });
 
-function closeNotification(button) {
-    const notification = button.closest('.notification');
-    notification.style.display = 'none'; // Close individual notification
-}
+        if (response.ok) {
+            alert('Message sent successfully!');
+            document.getElementById('contactForm').reset();
+        } else {
+            alert('Failed to send message. Please try again.');
+        }
+    } catch (error) {
+        alert('Error occurred. Please try again.');
+    }
+});
