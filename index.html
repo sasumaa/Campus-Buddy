@@ -19,33 +19,37 @@
     <!-- ===================== AUTHENTICATION PAGES ===================== -->
     <div id="authPages">
 
-        <!-- ===================== LOGIN PAGE ===================== -->
-        <div id="loginPage" class="auth-page hidden" role="dialog" aria-labelledby="loginTitle">
-            <h2 id="loginTitle">Login</h2>
-            <form id="loginForm" onsubmit="event.preventDefault(); login();">
-                <input type="text" id="username" placeholder="Enter your username" required aria-label="Username">
-                <input type="password" id="password" placeholder="Enter your password" required aria-label="Password">
-                <label for="privacyCheck" class="privacy-label">
-                    <input type="checkbox" id="privacyCheck" aria-label="Agree to privacy policy">
-                    I agree to the <a href="privacy.html" target="_blank" aria-label="Privacy Policy">Privacy Policy</a>
-                </label>
-                <button id="loginButton" type="submit" disabled>Login</button>
-            </form>
-            <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
-        </div>
+<!-- ===================== LOGIN PAGE ===================== -->
+<div id="loginPage" class="auth-page hidden" role="dialog" aria-labelledby="loginTitle">
+    <h2 id="loginTitle">Login</h2>
+    <form id="loginForm" onsubmit="event.preventDefault(); login();">
+        <input type="text" id="username" placeholder="Enter your username" required aria-label="Username" aria-describedby="usernameHelp">
+        <input type="password" id="password" placeholder="Enter your password" required aria-label="Password" aria-describedby="passwordHelp">
+        <input type="checkbox" id="privacyCheck" aria-label="Agree to privacy policy">
+        <label for="privacyCheck">I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a></label>
 
-        <!-- ===================== SIGN-UP PAGE ===================== -->
-        <div id="signUpPage" class="auth-page hidden" role="dialog" aria-labelledby="signupTitle">
-            <h2 id="signupTitle">Sign Up</h2>
-            <form id="signUpForm" onsubmit="event.preventDefault(); signUp();">
-                <input type="text" id="newUsername" placeholder="Enter your username" required aria-label="Username">
-                <input type="password" id="newPassword" placeholder="Enter your password" required aria-label="Password">
-                <input type="email" id="newEmail" placeholder="Enter your email" required aria-label="Email">
-                <button type="submit">Sign Up</button>
-            </form>
-            <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
-        </div>
-    </div>
+        <button id="loginButton" type="submit" disabled>Login</button>
+    </form>
+    <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
+</div>
+
+<!-- ===================== SIGN-UP PAGE ===================== -->
+<div id="signUpPage" class="auth-page hidden" role="dialog" aria-labelledby="signupTitle">
+    <h2 id="signupTitle">Sign Up</h2>
+    <form id="signUpForm" onsubmit="event.preventDefault(); signUp();">
+        <input type="text" id="newUsername" placeholder="Enter your username" required aria-label="Username" aria-describedby="newUsernameHelp">
+        <small id="newUsernameHelp" class="form-text text-muted">Choose a username that represents you well.</small>
+
+        <input type="password" id="newPassword" placeholder="Enter your password" required aria-label="Password" aria-describedby="newPasswordHelp">
+        <small id="newPasswordHelp" class="form-text text-muted">Your password must be at least 8 characters long.</small>
+
+        <input type="email" id="newEmail" placeholder="Enter your email" required aria-label="Email" aria-describedby="emailHelp">
+        <small id="emailHelp" class="form-text text-muted">Enter a valid email address to receive notifications.</small>
+
+        <button type="submit">Sign Up</button>
+    </form>
+    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
+</div>
 
     <!-- ===================== MAIN CONTENT ===================== -->
     <div id="mainContent" class="hidden">
