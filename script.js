@@ -71,9 +71,16 @@ function showSignUp() {
 
 // Logout function to hide main content and show login page
 function logout() {
-    document.getElementById("mainContent").classList.add("hidden"); // Hide main content
-    document.getElementById("loginPage").classList.remove("hidden"); // Show login page
+    // Hide main content
+    document.getElementById("mainContent").classList.add("hidden");
+    
+    // Show login page
+    document.getElementById("loginPage").classList.remove("hidden");
 }
+
+// Add event listener to the sign out button
+document.querySelector(".signout-btn").addEventListener("click", logout);
+
 
 // Function to show a particular page by its ID (Home, Events, Account, etc.)
 function showPage(pageId) {
@@ -114,13 +121,11 @@ function openDocumentsPortal() {
     window.open("https://www.tcsion.com/SelfServices/", "_blank"); // Open the portal URL in a new window/tab
 }
 
-// Enable the login button only if the privacy policy checkbox is checked
-const privacyCheck = document.getElementById("privacyCheck");
-const loginBtn = document.getElementById("loginButton");
-
-privacyCheck.addEventListener("change", () => {
-    loginBtn.disabled = !privacyCheck.checked; // Disable login button if privacy policy is not agreed
+// Function to enable login button when the privacy policy checkbox is checked
+document.getElementById('privacyCheck').addEventListener('change', function() {
+    document.getElementById('loginButton').disabled = !this.checked;
 });
+
 
 // Function to compose an email (opens user's default mail client with the email)
 function composeEmail(email) {
