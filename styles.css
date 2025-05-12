@@ -47,10 +47,11 @@ body {
     max-width: 400px;
     margin: 100px auto;
     padding: 20px;
-    background-color: var(--light-gray); /* Background of the form */
+    background-color: var(--light-gray);
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Shadow around form */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
+    font-family: Arial, sans-serif; /* Ensure consistent font */
 }
 
 .auth-page input {
@@ -59,19 +60,47 @@ body {
     padding: 10px;
     margin: 10px 0;
     border: 1px solid #ccc;
-    border-radius: 8px; /* Rounded corners for inputs */
+    border-radius: 8px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.auth-page input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .auth-page button {
-    background-color: var(--accent-color); /* Accent color for buttons */
-    color: #fff; /* White text */
+    background-color: var(--accent-color);
+    color: #fff;
     border: none;
     padding: 10px 20px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
+.auth-page button:hover {
+    background-color: #0056b3; /* Darker shade of accent color */
+    transform: scale(1.05); /* Slightly increase button size */
+}
+
+.auth-page button:disabled {
+    background-color: #ccc; /* Gray out disabled button */
+    cursor: not-allowed;
+}
+
+.auth-page small {
+    font-size: 0.8em;
+    color: #777;
+    margin-top: 5px;
+}
+
+.auth-page p a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+}
 /* =======================================================
    HEADER AND NAVIGATION BAR
 ======================================================= */
@@ -834,4 +863,3 @@ footer .footer-bottom a:hover {
 .signout-btn {
     margin-top: 30px; /* Add spacing under the button */
 }
-
