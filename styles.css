@@ -293,7 +293,7 @@ nav li a:focus {
     color: #cc0000; /* Darker color on hover */
 }
 
-/* =======================================================
+ /* =======================================================
    MAP SECTION
 ======================================================= */
 .map-container iframe {
@@ -301,6 +301,31 @@ nav li a:focus {
     height: 500px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================================================
+   SHUTTLE SERVICE SECTION EXTENDED
+======================================================= */
+.shuttle-section h4 {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    color: #2c3e50;
+}
+
+.shuttle-section .route ol {
+    margin-top: 10px;
+    padding-left: 20px;
+    list-style-type: decimal;
+}
+
+.shuttle-section .route li {
+    background-color: #f0f0f0;
+    margin: 6px 0;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #2c3e50;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 /* =======================================================
