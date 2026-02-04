@@ -1,61 +1,72 @@
-// ===============================
-// INITIAL LOAD
-// ===============================
+/* ==========================================================
+   GLOBAL STATE
+========================================================== */
+let currentUser = null;
+let notificationTimeout;
+
+/* ==========================================================
+   WAIT FOR DOM LOAD
+========================================================== */
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Simulated Loading Screen
+    /* ---------------- LOADING SCREEN ---------------- */
     setTimeout(() => {
-        document.getElementById("loadingScreen").style.display = "none";
-        document.getElementById("loginPage").classList.remove("hidden");
-    }, 1500);
+        const loading = document.getElementById("loadingScreen");
+        const loginPage = document.getElementById("loginPage");
 
-    // Attach Sign Out Button
-    const signOutBtn = document.querySelector(".signout-btn");
-    if (signOutBtn) {
-        signOutBtn.addEventListener("click", logout);
+        if (loading) loading.style.display = "none";
+        if (loginPage) loginPage.classList.remove("hidden");
+    }, 2000);
+
+    /* ---------------- SIGNOUT BUTTON ---------------- */
+    const signoutBtn = document.querySelector(".signout-btn");
+    if (signoutBtn) {
+        signoutBtn.addEventListener("click", logout);
     }
 
-    // Privacy Checkbox Control
+    /* ---------------- PRIVACY CHECK ---------------- */
     const privacyCheck = document.getElementById("privacyCheck");
-    if (privacyCheck) {
+    const loginButton = document.getElementById("loginButton");
+
+    if (privacyCheck && loginButton) {
         privacyCheck.addEventListener("change", function () {
-            document.getElementById("loginButton").disabled = !this.checked;
+            loginButton.disabled = !this.checked;
         });
     }
 
-    // Contact Form Submission
+    /* ---------------- CONTACT FORM ---------------- */
     const contactForm = document.getElementById("contactForm");
+
     if (contactForm) {
         contactForm.addEventListener("submit", handleContactForm);
     }
-
 });
 
 
-// ===============================
-// AUTHENTICATION
-// ===============================
+/* ==========================================================
+   AUTH SYSTEM
+========================================================== */
 
 function login() {
     const username = document.getElementById("username").value.trim();
     const password = document.getElementById("password").value.trim();
 
+    if (!username || !password) {
+        alert("Please enter username and password.");
+        return;
+    }
+
     const storedPassword = localStorage.getItem(username);
 
-    if (storedPassword && storedPassword === password) {
-
-        localStorage.setItem("loggedInUser", username);
+    if (storedPassword === password) {
+        currentUser = username;
 
         document.getElementById("loginPage").classList.add("hidden");
-        document.getElementById("authPages").classList.add("hidden");
         document.getElementById("mainContent").classList.remove("hidden");
 
-        document.getElementById("userDisplayName").textContent = username;
-
-        showPage("home");
-
+        updateAccountInfo();
     } else {
-        alert("Invalid login credentials.");
+        alert("Invalid login. Please try again.");
     }
 }
 
@@ -76,31 +87,57 @@ function signUp() {
 
     localStorage.setItem(username, password);
     localStorage.setItem(`${username}_email`, email);
-    localStorage.setItem("loggedInUser", username);
 
-    alert("Account created successfully!");
+    currentUser = username;
 
-    document.getElementById("signUpPage").classList.add("hidden");
-    document.getElementById("authPages").classList.add("hidden");
-    document.getElementById("mainContent").classList.remove("hidden");
-
-    document.getElementById("userDisplayName").textContent = username;
-
-    showPage("home");
+    showMainContent();
+    updateAccountInfo();
 }
 
 function logout() {
-    localStorage.removeItem("loggedInUser");
+    currentUser = null;
 
     document.getElementById("mainContent").classList.add("hidden");
-    document.getElementById("authPages").classList.remove("hidden");
     document.getElementById("loginPage").classList.remove("hidden");
 }
 
+function showMainContent() {
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("signUpPage").classList.add("hidden");
+    document.getElementById("mainContent").classList.remove("hidden");
+}
 
-// ===============================
-// PAGE NAVIGATION
-// ===============================
+
+/* ==========================================================
+   ACCOUNT INFO
+========================================================== */
+
+function updateAccountInfo() {
+    if (!currentUser) return;
+
+    const email = localStorage.getItem(`${currentUser}_email`);
+
+    const nameField = document.getElementById("userDisplayName");
+    const emailField = document.getElementById("userEmail");
+
+    if (nameField) nameField.textContent = currentUser;
+    if (emailField) emailField.textContent = email;
+}
+
+
+/* ==========================================================
+   PAGE NAVIGATION
+========================================================== */
+
+function showLogin() {
+    document.getElementById("signUpPage").classList.add("hidden");
+    document.getElementById("loginPage").classList.remove("hidden");
+}
+
+function showSignUp() {
+    document.getElementById("loginPage").classList.add("hidden");
+    document.getElementById("signUpPage").classList.remove("hidden");
+}
 
 function showPage(pageId) {
     document.querySelectorAll(".page").forEach(page => {
@@ -114,15 +151,12 @@ function showPage(pageId) {
 }
 
 
-// ===============================
-// NOTIFICATIONS
-// ===============================
-
-let notificationTimeout;
+/* ==========================================================
+   NOTIFICATIONS
+========================================================== */
 
 function toggleNotifications() {
     const panel = document.getElementById("notificationPanel");
-
     if (!panel) return;
 
     if (panel.style.display === "block") {
@@ -130,7 +164,7 @@ function toggleNotifications() {
     } else {
         panel.style.display = "block";
         clearTimeout(notificationTimeout);
-        notificationTimeout = setTimeout(closeNotifications, 8000);
+        notificationTimeout = setTimeout(closeNotifications, 10000);
     }
 }
 
@@ -145,57 +179,72 @@ function closeNotification(button) {
 }
 
 
-// ===============================
-// EVENTS SYSTEM
-// ===============================
+/* ==========================================================
+   EVENTS SYSTEM
+========================================================== */
 
 function registerEvent(eventName, button) {
 
+    if (!currentUser) {
+        alert("Please login first.");
+        return;
+    }
+
+    const registeredList = document.getElementById("registered-events-list");
+
+    // Prevent duplicate registration
+    const existingEvents = registeredList.querySelectorAll("li");
+    for (let item of existingEvents) {
+        if (item.dataset.event === eventName) {
+            alert("Already registered for this event.");
+            return;
+        }
+    }
+
     button.disabled = true;
-    button.classList.add("registered");
     button.textContent = "Registered";
 
     const li = document.createElement("li");
+    li.className = "registered-event-item";
+    li.dataset.event = eventName;
     li.textContent = eventName;
 
     const unregisterBtn = document.createElement("button");
-    unregisterBtn.textContent = "❌";
     unregisterBtn.className = "unregister-btn";
+    unregisterBtn.innerHTML = "❌";
+    unregisterBtn.title = "Unregister";
 
     unregisterBtn.onclick = function () {
-        li.remove();
-        button.disabled = false;
-        button.classList.remove("registered");
-        button.textContent = "Register";
+        unregisterEvent(li, button);
     };
 
     li.appendChild(unregisterBtn);
+    registeredList.appendChild(li);
+}
 
-    document.getElementById("registered-events-list").appendChild(li);
+function unregisterEvent(listItem, registerButton) {
+    listItem.remove();
+    registerButton.disabled = false;
+    registerButton.textContent = "Register";
 }
 
 
-// ===============================
-// DOCUMENTS
-// ===============================
+/* ==========================================================
+   EXTERNAL LINKS
+========================================================== */
 
 function openDocumentsPortal() {
     window.open("https://www.tcsion.com/SelfServices/", "_blank");
 }
-
-
-// ===============================
-// EMAIL
-// ===============================
 
 function composeEmail(email) {
     window.location.href = `mailto:${email}`;
 }
 
 
-// ===============================
-// CONTACT FORM
-// ===============================
+/* ==========================================================
+   CONTACT FORM
+========================================================== */
 
 async function handleContactForm(event) {
     event.preventDefault();
@@ -210,24 +259,26 @@ async function handleContactForm(event) {
     }
 
     try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbzsGUzu0KHaZOzZy5tLEBpc7hExXGZ3Mg8_QeB-hqmik8EnHqubsm7OuV104d1-cxH3/exec", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams({
-                name,
-                email,
-                message
-            })
-        });
+        const response = await fetch(
+            "https://script.google.com/macros/s/AKfycbzsGUzu0KHaZOzZy5tLEBpc7hExXGZ3Mg8_QeB-hqmik8EnHqubsm7OuV104d1-cxH3/exec",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams({
+                    name: name,
+                    email: email,
+                    message: message
+                })
+            }
+        );
 
         if (response.ok) {
             alert("Message sent successfully!");
-            document.getElementById("contactForm").reset();
+            event.target.reset();
         } else {
             alert("Failed to send message.");
         }
-
     } catch (error) {
-        alert("Network error. Try again.");
+        alert("Error occurred. Please try again.");
     }
 }
