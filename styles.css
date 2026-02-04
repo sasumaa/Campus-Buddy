@@ -20,6 +20,16 @@ body {
     background-color: var(--background-color); /* Set background color */
     color: var(--text-color); /* Set primary text color */
 }
+/* =======================================================
+   GLOBAL CONTAINER SYSTEM (Layout Structure)
+======================================================= */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
+}
 
 /* Utility Class to Hide Elements */
 .hidden {
@@ -1033,3 +1043,4 @@ footer .footer-bottom a:hover {
     transform: translateY(-6px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
+
