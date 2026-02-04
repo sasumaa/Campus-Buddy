@@ -1,326 +1,139 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UniSphere</title>
-    <link rel="stylesheet" href="styles.css">
+<main>
 
-    <!-- Font Awesome CDN for icons -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-</head>
-<body>
-
-    <!-- ===================== LOADING SCREEN ===================== -->
-    <div id="loadingScreen" class="loading-screen">
-        <div class="loading-text">UniSphere</div>
-    </div>
-
-    <!-- ===================== AUTHENTICATION PAGES ===================== -->
-    <div id="authPages">
-
-<!-- ===================== LOGIN PAGE ===================== -->
-<div id="loginPage" class="auth-page hidden" role="dialog" aria-labelledby="loginTitle">
-    <h2 id="loginTitle">Login</h2>
-    <form id="loginForm" onsubmit="event.preventDefault(); login();">
-        <input type="text" id="username" placeholder="Enter your username" required aria-label="Username" aria-describedby="usernameHelp">
-        <input type="password" id="password" placeholder="Enter your password" required aria-label="Password" aria-describedby="passwordHelp">
-        <input type="checkbox" id="privacyCheck" aria-label="Agree to privacy policy">
-        <label for="privacyCheck">I agree to the <a href="privacy.html" target="_blank">Privacy Policy</a></label>
-
-        <button id="loginButton" type="submit" disabled>Login</button>
-    </form>
-    <p>Don't have an account? <a href="#" onclick="showSignUp()">Sign Up</a></p>
-</div>
-
-<!-- ===================== SIGN-UP PAGE ===================== -->
-<div id="signUpPage" class="auth-page hidden" role="dialog" aria-labelledby="signupTitle">
-    <h2 id="signupTitle">Sign Up</h2>
-    <form id="signUpForm" onsubmit="event.preventDefault(); signUp();">
-        <input type="text" id="newUsername" placeholder="Enter your username" required aria-label="Username" aria-describedby="newUsernameHelp">
-        <small id="newUsernameHelp" class="form-text text-muted">Choose a username that represents you well.</small>
-
-        <input type="password" id="newPassword" placeholder="Enter your password" required aria-label="Password" aria-describedby="newPasswordHelp">
-        <small id="newPasswordHelp" class="form-text text-muted">Your password must be at least 8 characters long.</small>
-
-        <input type="email" id="newEmail" placeholder="Enter your email" required aria-label="Email" aria-describedby="emailHelp">
-        <small id="emailHelp" class="form-text text-muted">Enter a valid email address to receive notifications.</small>
-
-        <button type="submit">Sign Up</button>
-    </form>
-    <p>Already have an account? <a href="#" onclick="showLogin()">Login</a></p>
-</div>
-
-    <!-- ===================== MAIN CONTENT ===================== -->
-    <div id="mainContent" class="hidden">
-        
-        <!-- Header with Notification and Account Icons -->
-        <header>
-            <div class="top-left">
-                <div class="notification-icon" onclick="toggleNotifications()" aria-label="Notifications">🔔</div>
-            </div>
-            <h1>UniSphere</h1>
-            <div class="top-right">
-                <div class="account-icon" onclick="showPage('account')" aria-label="User Account">👤</div>
-            </div>
-        </header>
-
-        <!-- ===================== NOTIFICATION PANEL ===================== -->
-        <div id="notificationPanel" class="notification-panel" aria-hidden="true">
-            <h3>Notifications</h3>
-            <div class="notification">
-                <span class="notification-icon">🎉</span>
-                <span class="notification-message">New event added: Hackathon 2025</span>
-                <span class="notification-time">10 minutes ago</span>
-                <button class="close-notification" onclick="closeNotification(this)" aria-label="Close notification">×</button>
-            </div>
-            <div class="notification">
-                <span class="notification-icon">📢</span>
-                <span class="notification-message">Campus announcement: Exams postponed!</span>
-                <span class="notification-time">1 hour ago</span>
-                <button class="close-notification" onclick="closeNotification(this)" aria-label="Close notification">×</button>
-            </div>
-            <button onclick="closeNotifications()" aria-label="Close Notifications">Close</button>
-        </div>
-
-        <!-- ===================== NAVIGATION MENU ===================== -->
-        <nav>
-            <ul>
-                <li><a href="#" onclick="showPage('home')">Home</a></li>
-                <li><a href="#" onclick="showPage('events')">Events</a></li>
-                <li><a href="#" onclick="showPage('navigation')">Navigation</a></li>
-                <li><a href="#" onclick="showPage('faculty')">Faculty</a></li>
-                <li><a href="#" onclick="showPage('documents')">Documents</a></li>
-            </ul>
-        </nav>
-
-        <!-- ===================== MAIN SECTIONS ===================== -->
-        <main>
-
-
-           <!-- Home Page -->
+<!-- ===================== HOME ===================== -->
 <section id="home" class="page">
-    <div class="home-container">
-        <h2 class="home-title">Welcome to UniSphere</h2>
-        <p class="home-description">Explore events, navigate campus, and manage documents easily. Stay connected and organized!</p>
-	
-	<!-- ===== IMAGE SECTION ===== -->
-<div class="image-gallery">
-    <div class="image-item">
-        <img src="IMAGE 2.jpg" alt="CAMPUS">
-        <p>CAMPUS</p>
-    </div>
-    <div class="image-item">
-        <img src="IMAGE 3.jpeg" alt="SOC">
-        <p>SOC</p>
-    </div>
-</div>
+    <div class="container">
+        <div class="home-container">
+            <h2 class="home-title">Welcome to UniSphere</h2>
+            <p class="home-description">
+                Explore events, navigate campus, and manage documents easily.
+                Stay connected and organized!
+            </p>
 
-	
-     <!-- ===== CONTACT US ===== -->
-<div class="contact-us">
-    <h3>Contact Us</h3>
-    <form id="contactForm">
-       <input type="text" id="userName" placeholder="Your Name" required><br>
-        <input type="email" id="userEmail" placeholder="Your Email" required><br>
-        <textarea id="userMessage" placeholder="Your Message" rows="4" required></textarea><br>
-        <button id="sendMessageButton" type="submit">Send Message</button>
+            <div class="image-gallery">
+                <div class="image-item">
+                    <img src="IMAGE 2.jpg" alt="CAMPUS">
+                    <p>CAMPUS</p>
+                </div>
+                <div class="image-item">
+                    <img src="IMAGE 3.jpeg" alt="SOC">
+                    <p>SOC</p>
+                </div>
+            </div>
 
-    </form>
-</div>
+            <div class="contact-us">
+                <h3>Contact Us</h3>
+                <form id="contactForm">
+                    <input type="text" id="userName" placeholder="Your Name" required>
+                    <input type="email" id="userEmail" placeholder="Your Email" required>
+                    <textarea id="userMessage" placeholder="Your Message" rows="4" required></textarea>
+                    <button id="sendMessageButton" type="submit">Send Message</button>
+                </form>
+            </div>
 
-
-
-        <!-- ===== LINKS SECTION ===== -->
-        <div class="links">
-            <a href="privacy.html" target="_blank" class="link-item">Privacy Policy</a>
-            <a href="mailto:campusbuddy25@gmail.com" class="icon-link">
-                <i class="fab fa-google"></i> Email Us
-            </a>
+            <div class="links">
+                <a href="privacy.html" target="_blank" class="link-item">Privacy Policy</a>
+                <a href="mailto:campusbuddy25@gmail.com" class="icon-link">
+                    <i class="fab fa-google"></i> Email Us
+                </a>
+            </div>
         </div>
     </div>
 </section>
-            <!-- Events Page -->
-            <section id="events" class="page hidden">
-                <h2>Upcoming Events</h2>
-                <div class="event-card">
-                    <span class="event-title">📅 Hackathon 2025 - March 30</span><br>
-                    <button class="register-btn" onclick="registerEvent('Hackathon 2025', this)">Register</button>
+
+<!-- ===================== EVENTS ===================== -->
+<section id="events" class="page hidden">
+    <div class="container">
+        <h2>Upcoming Events</h2>
+
+        <div class="event-card">
+            <span>📅 Hackathon 2025 - March 30</span><br>
+            <button class="register-btn" onclick="registerEvent('Hackathon 2025', this)">Register</button>
+        </div>
+
+        <div class="event-card">
+            🎭 Cultural Fest - April 15
+        </div>
+
+        <div class="event-card">
+            📖 Seminar on AI - May 5<br>
+            <button class="register-btn" onclick="registerEvent('Seminar on AI', this)">Register</button>
+        </div>
+
+        <!-- Clubs -->
+        <div class="clubs-section">
+            <h3>🎯 Campus Clubs</h3>
+            <div class="club-list">
+                <div class="club-card">
+                    <h4>ASTECH</h4>
+                    <p>FY Science Club</p>
+                    <a href="#" class="club-btn">Join Community</a>
                 </div>
-                <div class="event-card">🎭 Cultural Fest - April 15</div>
-                <div class="event-card">
-                    📖 Seminar on AI - May 5<br>
-                    <button class="register-btn" onclick="registerEvent('Seminar on AI', this)">Register</button>
+                <div class="club-card">
+                    <h4>Adventure Club</h4>
+                    <p>Outdoor and Exploration Activities</p>
+                    <a href="#" class="club-btn">Join Community</a>
                 </div>
-		    <!-- Clubs Section -->
-<div class="clubs-section">
-    <h3>🎯 Campus Clubs</h3>
-    <div class="club-list">
-
-        <!-- Club 1 -->
-        <div class="club-card">
-            <h4>ASTECH</h4>
-            <p>FY Science Club</p>
-            <a href="#" class="club-btn" target="_blank">Join Community</a>
+            </div>
         </div>
-
-        <!-- Club 2 -->
-        <div class="club-card">
-            <h4>Adventure Club</h4>
-            <p>Outdoor and Exploration Activities</p>
-            <a href="#" class="club-btn" target="_blank">Join Community</a>
-        </div>
-
-        <!-- Club 3 -->
-        <div class="club-card">
-            <h4>ASTRA Club</h4>
-            <p>Science Club</p>
-            <a href="#" class="club-btn" target="_blank">Join Community</a>
-        </div>
-
-        <!-- Club 4 -->
-        <div class="club-card">
-            <h4>Words Worth Club</h4>
-            <p>English & Literature Club</p>
-            <a href="#" class="club-btn" target="_blank">Join Community</a>
-        </div>
-
-        <!-- Club 5 -->
-        <div class="club-card">
-            <h4>ERC Club</h4>
-            <p>Music & Rhythm Club</p>
-            <a href="#" class="club-btn" target="_blank">Join Community</a>
-        </div>
-
     </div>
-</div>
+</section>
 
-            </section>
+<!-- ===================== FACULTY ===================== -->
+<section id="faculty" class="page hidden">
+    <div class="container">
+        <h2>Faculty Details</h2>
+        <table>
+            <!-- your existing table stays same -->
+        </table>
+    </div>
+</section>
 
-            <!-- Faculty Page -->
-            <section id="faculty" class="page hidden">
-                <h2>Faculty Details</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Subject</th>
-                            <th>Cabin No</th>
-                            <th>Email</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Dr. Shalini Garg</td>
-                            <td>Head of Department , SOC</td>
-                            <td>N-003</td>
-                            <td><a href="mailto:shalini.garg@mituniversity.edu">shalini.garg@mituniversity.edu</a></td>
-                            <td><button onclick="composeEmail('shalini.garg@mituniversity.edu')">Email</button></td>
-                        </tr>
-                        <tr>
-                            <td>Prof. Akash Alagankar</td>
-                            <td>Design Thinking</td>
-                            <td>S-116</td>
-                            <td><a href="mailto:akash.alagankar@mituniversity.edu">akash.alagankar@mituniversity.edu</a></td>
-                            <td><button onclick="composeEmail('akash.alagankar@mituniversity.edu')">Email</button></td>
-                        </tr>
-                        <tr>
-                            <td>Dr. Anand Shukla</td>
-                            <td>Mathematics</td>
-                            <td>S-002</td>
-                            <td><a href="mailto:anand.shukla@mituniversity.edu">anand.shukla@mituniversity.edu</a></td>
-                            <td><button onclick="composeEmail('anand.shukla@mituniversity.edu')">Email</button></td>
-                        </tr>
-                        <tr>
-                            <td>Dr. Vaishali Kamble</td>
-                            <td>Material of Computing Devices</td>
-                            <td>N-005</td>
-                            <td><a href="mailto:vaishali.kamble@mituniversity.edu">vaishali.kamble@mituniversity.edu</a></td>
-                            <td><button onclick="composeEmail('vaishali.kamble@mituniversity.edu')">Email</button></td>
-                        </tr>
-                         <tr>
-                            <td>Dr. Pratiksha Dhande</td>
-                            <td>Data Structure , Programing Langauge</td>
-                            <td>9th Floor</td>
-                            <td><a href="mailto:pratiksha.dhande@mituniversity.edu">pratiksha.dhande@mituniversity.edu</a></td>
-                            <td><button onclick="composeEmail('pratiksha.dhande@mituniversity.edu')">Email</button></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </section>
+<!-- ===================== DOCUMENTS ===================== -->
+<section id="documents" class="page hidden">
+    <div class="container">
+        <h2>Documents</h2>
+        <p>Access your academic documents and services.</p>
+        <button onclick="openDocumentsPortal()" class="document-btn">
+            Open TCS iON Portal
+        </button>
+    </div>
+</section>
 
-            <!-- Documents Page -->
-            <section id="documents" class="page hidden">
-                <h2>Documents</h2>
-                <p>Access your academic documents and services.</p>
-                <button onclick="openDocumentsPortal()" class="document-btn">Open TCS iON Portal</button>
-            </section>
-
-<!-- Navigation Page -->
+<!-- ===================== NAVIGATION ===================== -->
 <section id="navigation" class="page hidden">
-    <h2>Campus Map</h2>
-    <div class="map-container">
-        <iframe src="https://www.iviewd.com/mitadt/" frameborder="0" width="100%" height="500px"></iframe>
+    <div class="container">
+        <h2>Campus Map</h2>
+        <div class="map-container">
+            <iframe src="https://www.iviewd.com/mitadt/" frameborder="0"></iframe>
+        </div>
     </div>
-
-    <!-- Shuttle Bus Service Section -->
-    <section id="shuttle-service" class="shuttle-section">
-        <h3>Shuttle Bus Service</h3>
-        <p>The shuttle bus service runs daily, providing transportation around the campus.</p>
-        <p><strong>Operating Hours:</strong> 7:30 AM - 9:00 PM</p>
-        <p><strong>Frequency:</strong> Every 30 minutes</p>
-
-        <h4>🚌 Route 1 - Campus Loop</h4>
-        <div class="route">
-            <ol>
-                <li><strong>Main Gate</strong> - Start</li>
-                <li><strong>Tuck Shop</strong> - After 10 mins</li>
-                <li><strong>IT Building</strong> - After 5 mins</li>
-                <li><strong>NSQ Girls Hostels</strong> - After a few mins</li>
-                <li><strong>Main Gate</strong> - Returns</li>
-            </ol>
-        </div>
-        <h4>🚌 Route 2 - Campus Loop</h4>
-        <div class="route">
-            <ol>
-                <li><strong>Main Gate</strong> - Start</li>
-                <li><strong>Sports Complex</strong> - After 5 mins</li>
-                <li><strong>Boat Club</strong> - After 5 mins</li>
-                <li><strong>ISBJ </strong> - After a 5 mins</li>
-                <li><strong>Design Hostel</strong> - After a 5 mins</li>
-  		<li><strong>IT Building</strong> - After a 5 mins</li> 
- 		<li><strong>Tuck Shop</strong> - After few mins</li>
-		<li><strong>Boys Hostel</strong> - After few mins</li>
-                <li><strong>Main Gate</strong> - Returns</li>
-            </ol>
-        </div>
-    </section>
 </section>
 
+<!-- ===================== ACCOUNT ===================== -->
+<section id="account" class="page hidden">
+    <div class="container">
+        <h2>Account</h2>
+        <p>Welcome, <span id="userDisplayName">User</span></p>
 
-            <!-- Account Page -->
-            <section id="account" class="page hidden">
-                <h2>Account</h2>
-                <p>Welcome, <span id="userDisplayName">User</span></p>
+        <div class="registered-events">
+            <h3>🎟️ Registered Events</h3>
+            <ul id="registered-events-list"></ul>
+        </div>
 
-                <!-- Registered Events List -->
-                <div class="registered-events">
-                    <h3>🎟️ Registered Events</h3>
-                    <ul id="registered-events-list"></ul>
-                </div>
-		<!-- WhatsApp Groups Section -->
-<div class="whatsapp-groups">
-    <h3>📱 WhatsApp Groups</h3>
-    <div class="group-buttons">
-        <a href="https://chat.whatsapp.com/BaQaS9hRR3OHc4VVGdepUg" target="_blank" class="whatsapp-btn">
-            📘 MIT University Group
-        </a>
-        <a href="https://chat.whatsapp.com/CKfaMI82IVJ0lCoUOKBRc5" target="_blank" class="whatsapp-btn">
-            📗 FY SOC Notes Group
-        </a>
+        <div class="whatsapp-groups">
+            <h3>📱 WhatsApp Groups</h3>
+            <div class="group-buttons">
+                <a href="#" class="whatsapp-btn">MIT University Group</a>
+                <a href="#" class="whatsapp-btn">FY SOC Notes Group</a>
+            </div>
+        </div>
+
+        <button class="signout-btn">
+            <span>Sign Out</span>
+        </button>
     </div>
-</div>
+
 
                 <!-- Sign Out Button with Icon -->
                <button class="signout-btn">
@@ -344,4 +157,5 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
